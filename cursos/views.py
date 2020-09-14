@@ -13,3 +13,13 @@ class CursoAPIView(APIView):
         cursos = Curso.objects.all()
         serializer = CursoSerializer(cursos, many=True)#Muitos cursos
         return Response(serializer.data)
+
+
+class AvaliacaoAPIView(APIView):
+    """
+       Avaliação de Api
+    """
+    def get(self, request):
+        avaliacoes = Avaliacao.objects.all()
+        serializer = AvaliacaoSerializer(avaliacoes, many=True)#Muitos cursos
+        return Response(serializer.data)
