@@ -30,3 +30,9 @@ class AvaliacaoAPIView(APIView):
         avaliacoes = Avaliacao.objects.all()
         serializer = AvaliacaoSerializer(avaliacoes, many=True)#Muitos cursos
         return Response(serializer.data)
+
+    def post(self, request):
+        serializer = AvaliacaoSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
