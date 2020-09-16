@@ -32,3 +32,17 @@ class AvaliacaoAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Avaliacao.objects.all()
     serializer_class = AvaliacaoSerializer
 
+
+#Avaliações de um curso
+class AvaliacoesDeUmCursoAPIView(generics.ListCreateAPIView):
+    queryset = Avaliacao.objects.all()
+    serializer_class = AvaliacaoSerializer
+
+    def get_queryset(self):
+        if self.kwargs.get('curso_pk'):
+            #Retorna às avaliações de um curso
+            return self.queryset.filter(curso_id=self.kwargs.get('curso_pk'))
+        #Retorna todas às avaliações
+        return self.queryset.all()
+
+
